@@ -1,22 +1,21 @@
 #!/bin/bash
-git_root=$(git rev-parse --show-toplevel | head -1)
-tar_dir=$(
-    cd "$1" || exit
+readonly program=$(basename $0)
+readonly args=(tex_filename)
+function print_usage_and_exit() {
+    echo >&2 "Usage: ${program} $(IFS=' '; echo ${args[*]^^})"
+    exit 1
+}
+if [ $# -ne ${#args[@]} ]; then
+    print_usage_and_exit
+fi
+for arg in ${args[@]}; do
+    eval "readonly ${arg}=$1"
+    shift
+done
+
+script_dir=$(
+    cd "$(dirname "$0")" || exit
     pwd
 )
-template_filename="template_toudai.tex"
-template_kind="template_platex"
-template_dir="$git_root/$template_kind"
-copy_dir="$tar_dir/$template_kind"
-cp -r "$template_dir" "$tar_dir"
-pushd "$tar_dir"
-pushd "$copy_dir"
-mv .vscode "$tar_dir/.vscode"
-mv .latexmkrc "$tar_dir"
-mv *.tex "$tar_dir"
-rm -rf build
-rm -f *.sh
-popd
-rmdir "$copy_dir"
-mv "$template_filename" main.tex
-popd
+
+bash "$script_dir/template.sh" "template_platex" "template_toudai.tex" "$tex_filename"
