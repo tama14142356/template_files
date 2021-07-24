@@ -1,0 +1,130 @@
+% \documentclass[dvipdfmx, a4paper, 11pt]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\documentclass[dvipdfmx,titlepage, 11pt, a4paper]{jsarticle}%A４用紙縦、明朝（デフォルト）１１ポイント
+\usepackage[top=18truemm,bottom=18truemm,left=18truemm,right=18truemm]{geometry}%余白調整
+% \setlength{\textheight}{45\baselineskip}
+% \setlength{\textwidth}{46zw}% ４６文字/行
+
+\usepackage{template}
+
+%%%====================================================================================================================================
+\titleformat*{\section}{\LARGE\mcfamily}%章のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\section}{0pt}{*0}{0pt}%章番号の後の空白行の削除
+\titleformat*{\subsection}{\Large\mcfamily}%節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsection}{0pt}{*0}{0pt}%節番号の後の空白行の削除
+\titleformat*{\subsubsection}{\large\mcfamily}%小節のタイトルの文字の大きさを通常サイズに設定（明朝体で）
+\titlespacing*{\subsubsection}{0pt}{*0}{0pt}%小節番号の後の空白行の削除
+
+\makeatletter
+%章番号付きコード番号
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+
+%章番号付き表番号
+\renewcommand{\thetable}{%
+    \arabic{section}.\arabic{table}%
+}
+\@addtoreset{table}{section}%
+
+%章番号付き図番号
+\renewcommand{\thefigure}{%
+	\arabic{section}.\arabic{figure}%
+}%
+\@addtoreset{figure}{section}%
+
+%章番号付き式番号
+\renewcommand{\theequation}{%
+	\arabic{section}.\arabic{equation}%
+}%
+\@addtoreset{equation}{section}%
+
+\renewcommand{\p@enumiii}{}% 箇条書きの参照時の番号の変更(2(親の番号)a(子の番号)→aだけに)
+\renewcommand{\p@enumii}{}% 箇条書きの参照時の番号の変更(2a→aだけに)
+\makeatother
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%ページのレイアウト設定
+\pagestyle{fancy}
+\newmarks\secmark%                         %章のヘッダー用のマーカ
+\renewcommand{\sectionmark}[1]{%
+\markboth{}{\thesection\ #1}%              %直前の小節を消す & \rightmarkにセクション名を格納(互換性も含めて)
+\marks\secmark{\thesection\ #1}%           %secmarkにセクション名を格納
+}%
+\renewcommand{\subsectionmark}[1]{%
+\markboth{\thesubsection\ #1}{\rightmark}% %\leftmarkにサブセクション名を格納(\rightmarkは上書きしない)
+}%
+%[]は省略可で省略すると{}で指定された内容が偶数ページ奇数のどちらにも適用される。
+%\renewcommand{\headrulewidth}{0pt}%       %ヘッダの罫線を消す
+\fancyfoot{}%                              %clear all footer fields
+\lhead{\rightmark}%                        %互換性の為に残したもの
+\lhead{\firstmarks\secmark}%               %左側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\chead{}%                                  %中央ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\rhead{\leftmark}%                         %右側ヘッダの定義[<偶数ページ>]{<奇数ページ>}
+\lfoot{template}%                          %左側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\cfoot{\thepage}%                          %中央フッターの定義[<偶数ページ>]{<奇数ページ>}
+\rfoot{Tomoya Takahashi}%                  %右側フッターの定義[<偶数ページ>]{<奇数ページ>}
+\renewcommand{\headrulewidth}{0.1pt}%      %ヘッダの線の太さ
+\renewcommand{\footrulewidth}{0.1pt}%      %フッターの線の太さ
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%しおり作成用オプション(テンプレート)
+%%%参照リンクの色の指定も行っています。
+\hypersetup{%
+  % pdfencoding=auto,%
+  setpagesize=false,%ページサイズを正しい値にする（正確にはページサイズをhyperrefに指定させない）
+  % bookmarks=true,%ブックマークを作成する
+  bookmarksdepth=subsubsection,%しおりのレベル
+  bookmarksopen=true,%ブックマークを開く
+  bookmarksnumbered=true,%しおりのレベルをブックマークに記載するか
+  bookmarkstype=toc,%
+  % pagebackref=true,%
+  linktocpage=true,%
+  %%===========================================
+  %%pdfファイルのプロパティ情報
+  pdftitle={テンプレート},%タイトル
+  % pdfsubject={},%サブタイトル
+  pdfauthor={高橋那弥},%名前
+  % pdfkeywords={意味論},%キーワード
+  %%===========================================
+  % colorlinks=true,%カラーリンクを使用する
+  % hidelinks,%リンクに色や枠をつけない
+  linkcolor=blue,%内部参照リンク用のカラー
+  anchorcolor=blue,%文献参照リンク用のカラー
+  urlcolor=blue%
+}
+%%%====================================================================================================================================
+
+
+\makeindex%索引用
+
+\renewcommand{\refname}{}%参考文献の文字を非表示にする
+\title{{\Huge テンプレート}\\[5mm]
+{\Large 締切日：YYYY/MM/DD hh:mm}\\[30mm]}
+\author{{\LARGE \hspace{22pt}氏名：高橋那弥}\\[1mm]{\LARGE 学籍番号：XXXXXXX}\\[30mm]}
+\date{{\Large 提出日：\today\hspace{5pt}\currenttime}}
+
+\begin{document}
+\maketitle
+\tableofcontents % 目次
+\pagenumbering{roman}%目次のページ番号のスタイルをローマ数字にする
+\newpage
+\setcounter{tocdepth}{3}%章節の深さを3にするsubsubsectionまで
+\pagenumbering{arabic}%他のページ番号は通常の数字にする。
+\section{template}
+\subsection{temp}
+% \newpage
+\cite{加藤恭義2000セルオートマトン法による道路交通シミュレーション}
+% \cite{kheterpal2018flow}
+\section{参考文献}
+\small
+\bibliographystyle{jplain}
+% \bibliographystyle{ieeetr}
+% \nocite{*} % 参考文献すべてを表示
+\bibliography{template}
+テンプレートです.
+\index{ティック@tikz}
+% \printindex
+\end{document}
