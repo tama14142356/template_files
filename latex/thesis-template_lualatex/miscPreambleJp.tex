@@ -1,0 +1,73 @@
+\usepackage{fullpage}
+
+% Include List of Figures, Tables, and Reference except for TOC
+\usepackage[nottoc]{tocbibind}
+\setcounter{tocdepth}{2}
+
+\usepackage{graphicx,color}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{slashbox}
+%\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{ifthen}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{comment}
+
+\usepackage{hyperref}
+\hypersetup{%
+  pdfencoding=auto,%
+  setpagesize=false,%
+  % bookmarks=true,%
+  bookmarksdepth=subsubsection,%
+  bookmarksopen=true,%ブックマークを開く
+  bookmarksnumbered=true,%
+  bookmarkstype=toc,%
+  % pagebackref=true,%
+  linktocpage=true,%
+  %%===========================================
+  %%pdfファイルのプロパティ情報
+  pdftitle={Bachelor/Master/Ph.D. Thesis},%
+  pdfauthor={Author},%
+  pdfkeywords={Key words},%
+  %%===========================================
+  % colorlinks=true,%カラーリンクを使用する
+  hidelinks,%リンクに色や枠をつけない
+  linkcolor=blue,%
+  anchorcolor=blue,%
+  urlcolor=blue%
+}
+
+% Reference
+\newcommand{\Cemb}[1]{\phantomsection \addcontentsline{toc}{chapter}{#1}\chapter*{#1}}
+\newcommand{\tref}[1]{表~\ref{#1}}
+\newcommand{\eref}[1]{式~(\ref{#1})}
+\newcommand{\fref}[1]{図~\ref{#1}}
+\newcommand{\alref}[1]{アルゴリズム~\ref{#1}}
+\newcommand{\sref}[1]{\ref{#1}章}
+\newcommand{\cref}[1]{\ref{#1}章}
+\newcommand{\appref}[1]{付録~\ref{#1}}
+% Equation
+\newcommand{\argmax}{\mathop{\rm argmax}\limits}
+\newcommand{\argmin}{\mathop{\rm argmin}\limits}
+\newcommand{\norm}[2]{\left|\left|#1\right|\right|^{#2}}
+\renewcommand{\bibname}{参考文献}
+
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{c.f}\onedot} \def\Cf{\emph{C.f}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\etal{et~al\onedot}
+\def\vice{\emph{vice versa}}
+\makeatother
+
+\input{miscCoverStyleJp}
+

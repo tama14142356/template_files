@@ -1,0 +1,100 @@
+\documentclass[12pt]{ltjsreport}
+
+% 古い環境でエラーになる場合は，以下で置き換える
+%\documentclass[12pt,report]{ltjsbook}
+
+% This template must be compiled by lualatex.
+% TeXStudio automatically select the compiler by the next line.
+% !TeX program = lualatex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% preamble for specifying packages
+\input{miscPreambleJp}
+
+% 添削時に有効にする
+%\doublespacing
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% header
+\pagenumbering{roman}
+
+\hypersetup{pageanchor=false}
+%% Title page
+\input{miscTitle}
+\hypersetup{pageanchor=true}
+\thispagestyle{plain}
+%% Abstract
+\Cemb{論文概要}
+\input{miscAbstract}
+\clearpage
+%% Acknowledgements
+\Cemb{謝辞}
+\input{miscAcknowledgement}
+
+\clearpage
+%% Table of Contents
+\tableofcontents
+\listoffigures
+\listoftables
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{List of Algorithms}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% main body
+\pagenumbering{arabic}
+
+%% Introduction
+\chapter{Introduction}
+\label{ch:intro}
+\input{mainIntroductionJp}
+\clearpage
+
+%% Related works
+\chapter{Literature Review}
+\label{ch:literature}
+\input{mainLiterature}
+\clearpage
+
+%% Proposed method
+\chapter{Proposed Method}
+\label{ch:method}
+\input{mainMethod}
+\clearpage
+
+%% Experimental results
+\chapter{Experimental Results}
+\label{ch:result}
+\input{mainResult}
+\clearpage
+
+%% Conclusion
+\chapter{Conclusion}
+\label{ch:conclusion}
+\input{mainConclusion}
+\clearpage
+
+% 日本語を含む文献では， jplain, jabbrv などを指定し，
+% pbibtex または upbibtex で処理すること．
+\bibliographystyle{jplain}
+%\bibliographystyle{tieice}  % 電子情報通信学会
+%\bibliographystyle{tipsj}   % 情報処理学会
+\bibliography{test,gc_ja}
+\clearpage
+
+%% Appendix
+\appendix
+% \addappheadtotoc
+
+\chapter{Detail of implementation}
+\label{apdx:implementation}
+\input{appendixImplementation}
+\clearpage
+
+\chapter{Basic theory of A}
+\label{apdx:A}
+\input{appendixA}
+\clearpage
+
+\end{document}
