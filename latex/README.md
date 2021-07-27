@@ -9,7 +9,10 @@ platexで動くテンプレート
 ### vscode 
 #### 準備
 - 拡張機能[latex-workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)のインストール
-- Linuxの場合、以下を実行
+- Linuxの場合、以下を実行  
+参考：[
+Beautify error on macOS Sierra: Can't locate YAML/Tiny.pm
+](https://github.com/Glavin001/atom-beautify/issues/1792)
 
 ```
 sudo apt update
