@@ -1,6 +1,6 @@
 #!/bin/bash
 readonly program=$(basename $0)
-readonly args=(tex_filename)
+readonly args=(tar_dir)
 function print_usage_and_exit() {
     echo >&2 "Usage: ${program} $(IFS=' '; echo ${args[*]^^})"
     exit 1
@@ -18,4 +18,4 @@ script_dir=$(
     pwd
 )
 
-bash "$script_dir/template.sh" "template_platex" "template_toudai.tex" "$tex_filename"
+bash "$script_dir/template.sh" "template_platex" "template_toudai.tex" "$tar_dir"

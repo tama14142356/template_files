@@ -1,6 +1,6 @@
 #!/bin/bash
 readonly program=$(basename $0)
-readonly args=(tex_filename template_kind tar_dir)
+readonly args=(template_kind tex_filename tar_dir)
 function print_usage_and_exit() {
     echo >&2 "Usage: ${program} $(IFS=' '; echo ${args[*]^^})"
     exit 1
