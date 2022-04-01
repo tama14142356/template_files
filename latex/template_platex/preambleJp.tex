@@ -1,0 +1,159 @@
+\usepackage{hyperref}%                     %目次のしおり作成用
+\usepackage{pxjahyper}%                    %しおりの日本語用
+% \usepackage{otf}%                          %旧字体表示のため(髙とか)
+% OTFパッケージを読み込むことでゴシック体を多ウェイト化できる． 
+% すなわち， textbf や alert などが通常の文字より太いゴシック体になる:
+\usepackage[deluxe, expert]{otf}           %旧字体表示のため(髙とか)
+% TikZ
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,arrows}
+\usepackage{bm}
+\usepackage{amsmath,amssymb}
+
+%%%====================================================================================================================================
+%%%定義コマンド
+%文字囲み用コマンド\maru{<点の名前>(defaultはO)}{<中の文字>}{<囲み線の色>}
+\newcommand{\maru}[3][O]{%
+	\tikz [remember picture, baseline = (#1.base)]%
+	\node [inner sep=0.6, circle, draw, #3] (#1) {\normalcolor \small #2};%
+  }%
+\newcommand{\mymaru}[2][black]{%
+  % $\,$%
+  \raisebox{-1.5pt}[7.5pt][0pt]{\tikz\draw circle [radius=#2, #1];}%
+  % $\,$%
+}%
+
+%四角に文字囲みコマンド\sikaku{<点の名前>(defaultはO)}{<中の文字>}{<囲み線の色>}
+\newcommand{\sikaku}[3][O]{%
+	\tikz [remember picture, baseline = (#1.base)]%
+	\node [inner sep=1.5, rectangle, draw, #3] (#1) {\normalcolor \small #2};%
+}%
+\newcommand{\mysikaku}[1][black]{%
+	\tikz \node [inner sep=1.5, rectangle, draw, fill=#1, #1] (O) at (0, 0) {};%
+}%
+
+%%%====================================================================================================================================
+\newcommand{\tref}[1]{表~\ref{#1}}
+\newcommand{\eref}[1]{式~\ref{#1}}
+\newcommand{\myeqref}[1]{式~\eqref{#1}}
+\newcommand{\fref}[1]{図~\ref{#1}}
+\newcommand{\alref}[1]{アルゴリズム~\ref{#1}}
+\newcommand{\sref}[1]{\ref{#1}ページ}
+% \newcommand{\sref}[1]{\ref{#1}章}
+% \newcommand{\cref}[1]{\ref{#1}章}
+% \newcommand{\appref}[1]{付録~\ref{#1}}
+% Equation
+\newcommand{\argmax}{\mathop{\rm argmax}\limits}
+\newcommand{\argmin}{\mathop{\rm argmin}\limits}
+\newcommand{\norm}[2]{\left|\left|#1\right|\right|^{#2}}
+\renewcommand{\top}{\mathsf{T}}
+\renewcommand{\bibname}{参考文献}
+\makeatletter
+\renewcommand{\tagform@}[1]{\maketag@@@{\maru{\ignorespaces#1\unskip\@@italiccorr}{black}}}
+\makeatother
+%%%====================================================================================================================================
+%%%Beamerの設定
+\usetheme{Boadilla}
+% \usetheme{Warsaw}
+\usecolortheme{rose}
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%Beamerフォント設定
+% \usepackage{txfonts} % TXフォント
+\usefonttheme{professionalfonts}
+% \renewcommand{\familydefault}{\sfdefault} % 数式フォントをサンセリフ体にする
+% \renewcommand{\mathfamilydefault}{\rmdefault}
+% \renewcommand{\mathfamilydefault}{\itdefault}
+% \renewcommand{\mathfamilydefault}{\sfdefault}
+% \renewcommand{\mathfamilydefault}{\ttdefault}
+% \renewcommand{\kanjifamilydefault}{\gtdefault} % 日本語フォントをゴシック体にする
+
+\usefonttheme{structurebold} % タイトル部を太字
+\setbeamerfont{alerted text}{series=\bfseries} % Alertを太字
+\setbeamerfont{section in toc}{series=\mdseries} % 目次は太字にしない
+\setbeamerfont{frametitle}{size=\Large} % フレームタイトル文字サイズ
+\setbeamerfont{title}{size=\LARGE} % タイトル文字サイズ
+\setbeamerfont{subtitle}{size=\large} % タイトル文字サイズ
+\setbeamerfont{date}{size=\large}  % 日付文字サイズ
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%Beamer色設定
+\definecolor{UniBlue}{RGB}{0,150,200} 
+\definecolor{AlertOrange}{RGB}{255,76,0}
+\definecolor{AlmostBlack}{RGB}{38,38,38}
+\setbeamercolor{normal text}{fg=AlmostBlack}  % 本文カラー
+\setbeamercolor{structure}{fg=UniBlue} % 見出しカラー
+\setbeamercolor{block title}{fg=UniBlue!50!black} % ブロック部分タイトルカラー
+\setbeamercolor{alerted text}{fg=AlertOrange} % \alert 文字カラー
+\mode<beamer>{
+  \definecolor{BackGroundGray}{RGB}{254,254,254}
+  \setbeamercolor{background canvas}{bg=BackGroundGray} % スライドモードのみ背景をわずかにグレーにする
+}
+%%%====================================================================================================================================
+%%%====================================================================================================================================
+%%%タイトルページ
+% \setbeamertemplate{title page}{%
+%     \vspace{2.5em}
+%     {\usebeamerfont{title} \usebeamercolor[fg]{title} \inserttitle \par}
+%     {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle \par}
+%     \vspace{1.5em}
+%     \begin{flushright}
+%         \usebeamerfont{author}\insertauthor\par
+%         \usebeamerfont{institute}\insertinstitute \par
+%         \vspace{3em}
+%         \usebeamerfont{date}\insertdate\par
+%         \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+%     \end{flushright}
+% }
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%フラットデザイン化
+\setbeamertemplate{blocks}[rounded] % Blockの影を消す
+\useinnertheme{circles} % 箇条書きをシンプルに
+% 下の方にある変なアイコン（ナビゲーションシンボル）を消す
+\setbeamertemplate{navigation symbols}{}
+% フッターをスライド番号だけにする
+% \setbeamertemplate{footline}[frame number]
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+% 定理
+\theoremstyle{definition}
+\newenvironment{mythm}{\begin{alertblock}{定理}}{\end{alertblock}} %自分の結果は赤色で表示
+
+% \AtBeginSection[]{
+%     \frame{\tableofcontents[currentsection, hideallsubsections]} %目次スライド
+% }
+%%%====================================================================================================================================
+
+
+%%%====================================================================================================================================
+%%%しおり作成用オプション(テンプレート)
+%%%参照リンクの色の指定も行っています。
+\hypersetup{%
+  % pdfencoding=auto,%
+  setpagesize=false,%ページサイズを正しい値にする（正確にはページサイズをhyperrefに指定させない）
+  % bookmarks=true,%ブックマークを作成する
+  bookmarksdepth=subsubsection,%しおりのレベル
+  bookmarksopen=true,%ブックマークを開く
+  bookmarksnumbered=true,%しおりのレベルをブックマークに記載するか
+  bookmarkstype=toc,%
+  % pagebackref=true,%
+  linktocpage=true,%
+  %%===========================================
+  %%pdfファイルのプロパティ情報
+  pdftitle={テンプレート},%タイトル
+  pdfsubject={sub title},%サブタイトル
+  pdfauthor={高橋那弥},%名前
+  pdfkeywords={beamer},%キーワード
+  %%===========================================
+  % colorlinks=true,%カラーリンクを使用する
+  % hidelinks,%リンクに色や枠をつけない
+  linkcolor=blue,%内部参照リンク用のカラー
+  anchorcolor=blue,%文献参照リンク用のカラー
+  urlcolor=blue%
+}
+%%%====================================================================================================================================
