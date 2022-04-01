@@ -1,0 +1,164 @@
+\documentclass[dvipdfmx, 11pt]{beamer}
+
+\usepackage{hyperref}%                     %目次のしおり作成用
+\usepackage{pxjahyper}%                    %しおりの日本語用
+% \usepackage{otf}%                          %旧字体表示のため(髙とか)
+% OTFパッケージを読み込むことでゴシック体を多ウェイト化できる． 
+% すなわち， textbf や alert などが通常の文字より太いゴシック体になる:
+\usepackage[deluxe, expert]{otf}           %旧字体表示のため(髙とか)
+% TikZ
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,arrows}
+
+%%%====================================================================================================================================
+%%%Beamerの設定
+\usetheme{Boadilla}
+% \usetheme{Warsaw}
+\usecolortheme{rose}
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%Beamerフォント設定
+% \usepackage{txfonts} % TXフォント
+% \renewcommand{\familydefault}{\sfdefault} % 数式フォントをサンセリフ体にする
+% \renewcommand{\kanjifamilydefault}{\gtdefault} % 日本語フォントをゴシック体にする
+
+\usefonttheme{structurebold} % タイトル部を太字
+\setbeamerfont{alerted text}{series=\bfseries} % Alertを太字
+\setbeamerfont{section in toc}{series=\mdseries} % 目次は太字にしない
+\setbeamerfont{frametitle}{size=\Large} % フレームタイトル文字サイズ
+\setbeamerfont{title}{size=\LARGE} % タイトル文字サイズ
+\setbeamerfont{date}{size=\small}  % 日付文字サイズ
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%Beamer色設定
+\definecolor{UniBlue}{RGB}{0,150,200} 
+\definecolor{AlertOrange}{RGB}{255,76,0}
+\definecolor{AlmostBlack}{RGB}{38,38,38}
+\setbeamercolor{normal text}{fg=AlmostBlack}  % 本文カラー
+\setbeamercolor{structure}{fg=UniBlue} % 見出しカラー
+\setbeamercolor{block title}{fg=UniBlue!50!black} % ブロック部分タイトルカラー
+\setbeamercolor{alerted text}{fg=AlertOrange} % \alert 文字カラー
+\mode<beamer>{
+  \definecolor{BackGroundGray}{RGB}{254,254,254}
+  \setbeamercolor{background canvas}{bg=BackGroundGray} % スライドモードのみ背景をわずかにグレーにする
+}
+%%%====================================================================================================================================
+%%%====================================================================================================================================
+%%%タイトルページ
+\setbeamertemplate{title page}{%
+    \vspace{2.5em}
+    {\usebeamerfont{title} \usebeamercolor[fg]{title} \inserttitle \par}
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle \par}
+    \vspace{1.5em}
+    \begin{flushright}
+        \usebeamerfont{author}\insertauthor\par
+        \usebeamerfont{institute}\insertinstitute \par
+        \vspace{3em}
+        \usebeamerfont{date}\insertdate\par
+        \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+    \end{flushright}
+}
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+%%%フラットデザイン化
+% \setbeamertemplate{blocks}[rounded] % Blockの影を消す
+% \useinnertheme{circles} % 箇条書きをシンプルに
+% 下の方にある変なアイコン（ナビゲーションシンボル）を消す
+\setbeamertemplate{navigation symbols}{}
+% フッターをスライド番号だけにする
+\setbeamertemplate{footline}[frame number]
+%%%====================================================================================================================================
+
+%%%====================================================================================================================================
+% 定理
+\theoremstyle{definition}
+\newenvironment{mythm}{\begin{alertblock}{定理}}{\end{alertblock}} %自分の結果は赤色で表示
+
+\AtBeginSection[]{
+    \frame{\tableofcontents[currentsection, hideallsubsections]} %目次スライド
+}
+%%%====================================================================================================================================
+
+
+%%%====================================================================================================================================
+%%%しおり作成用オプション(テンプレート)
+%%%参照リンクの色の指定も行っています。
+\hypersetup{%
+  % pdfencoding=auto,%
+  setpagesize=false,%ページサイズを正しい値にする（正確にはページサイズをhyperrefに指定させない）
+  % bookmarks=true,%ブックマークを作成する
+  bookmarksdepth=subsubsection,%しおりのレベル
+  bookmarksopen=true,%ブックマークを開く
+  bookmarksnumbered=true,%しおりのレベルをブックマークに記載するか
+  bookmarkstype=toc,%
+  % pagebackref=true,%
+  linktocpage=true,%
+  %%===========================================
+  %%pdfファイルのプロパティ情報
+  pdftitle={テンプレート},%タイトル
+  pdfsubject={beamerテスト},%サブタイトル
+  pdfauthor={高橋那弥},%名前
+  % pdfkeywords={意味論},%キーワード
+  %%===========================================
+  % colorlinks=true,%カラーリンクを使用する
+  % hidelinks,%リンクに色や枠をつけない
+  linkcolor=blue,%内部参照リンク用のカラー
+  anchorcolor=blue,%文献参照リンク用のカラー
+  urlcolor=blue%
+}
+%%%====================================================================================================================================
+
+
+% \title{テンプレート\\[5mm] 締切日：YYYY/MM/DD hh:mm\\[30mm]}
+% \author{氏名：高橋那弥\\[1mm] 学籍番号：XXXXXXX\\[150mm]}
+% \date{}
+\title{テンプレート}
+\author{\textbf{高橋那弥}}
+\institute{文殊の知恵}
+\date{\today}
+
+\begin{document}
+\maketitle
+\frame{\tableofcontents[hideallsubsections]}
+\section{はじめてのスライド}
+\begin{frame}
+  \frametitle{はじめてのスライド}
+  \begin{definition}
+    1と自分自身しか約数を持たない数を\alert{素数}という．
+  \end{definition}
+  \begin{example}
+    \begin{itemize}
+      \item 2 は素数．
+      \pause
+      \item 3 も素数．
+      \pause
+      \item 4 は素数ではない．
+    \end{itemize}
+  \end{example}
+\end{frame}
+\section{素数は無限に存在する}
+\begin{frame}{素数は無限に存在する}
+  \begin{theorem}
+  素数は無限に存在する．
+  \end{theorem}
+  \begin{proof}
+    \begin{enumerate}
+      \item<1-> $p_1, \dots, p_n$ がすべての素数だと仮定する．
+      \item<2-> $q:=p_1\dots p_n + 1$ とおく．
+      \item<3-> すると $q$ はどの $p_1,\dots,p_n$ でも割り切れない．
+      \item<1-> したがって，$q$は新たな素数を約数にもつことになって矛盾する．\qedhere
+    \end{enumerate}
+  \end{proof}
+  \uncover<4->{証明は\alert{背理法}を使った．}
+\end{frame}
+\section{test}
+\begin{frame}
+  \frametitle{test}
+  \begin{block}{blockタイトル}
+    これはBlockの中身です．
+  \end{block}
+\end{frame}
+\end{document}
